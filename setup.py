@@ -8,7 +8,7 @@ dependency_links = []
 
 setup(
     name = 'mobideep_helper',
-    version = '0.0.1',
+    version = '0.0.2',
     description = 'MobiDeep Helper',
     author = 'leesak',
     author_email = 'is77@mobigen.com',
