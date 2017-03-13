@@ -12,10 +12,14 @@ DEFAULT_CONF = {
         'writer': {
             'cls': 'mobideep_helper.writer.file.FileWriter',
             'destination': '/tmp',
-            'prefix': 'mobideep_helper'
+            'prefix': 'mobideep_helper',
+            'option': 'a'
         },
         'partitioner': {
             'cls': 'mobideep_helper.partitioner.test.RawPartitioner'
+        },
+        'transformer': {
+            'cls': 'mobideep_helper.transformer.Transformer'
         }
     }
 }

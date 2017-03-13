@@ -3,15 +3,17 @@ mobideep_helper:
     cls: 'mobideep_helper.reader.slide.SlidingFileReader'
     header: true
     window_size: 14
-#  reader:
-#    cls: 'mobideep_helper.reader.file.FileReader'
-#    header: true
-#    max_count: 13
   writer:
     cls: 'mobideep_helper.writer.file.FileWriter'
     option: 'a'
-    destination: '/tmp'
+#    destination: '/home/mobideep/data'
+    destination: '/tmp/mobideep/data'
     prefix: 'mobideep_helper'
+    partition_dir: true
   partitioner:
     cls: 'mobideep_helper.partitioner.fibo.FibonacciPartitioner'
     fibonacci_length: 6
+  transformer:
+    cls: 'mobideep_helper.transformer.ade.TextToBinaryTransformer'
+    semcode_size: 16
+    vector_max_size: 16
