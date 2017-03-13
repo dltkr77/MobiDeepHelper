@@ -8,6 +8,7 @@ resources/*
 build/*
 dist/*
 *.egg-info/*
+*.pyc
 
 # Intellij IDE
 .idea/
