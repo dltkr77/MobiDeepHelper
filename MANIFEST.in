@@ -1,0 +1,3 @@
+include *.md
+include etc/example.yml
+recursive-include mobideep_helper *

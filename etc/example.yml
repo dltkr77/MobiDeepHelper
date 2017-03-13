@@ -1,0 +1,17 @@
+mobideep_helper:
+  reader:
+    cls: 'mobideep_helper.reader.slide.SlidingFileReader'
+    header: true
+    window_size: 14
+#  reader:
+#    cls: 'mobideep_helper.reader.file.FileReader'
+#    header: true
+#    max_count: 13
+  writer:
+    cls: 'mobideep_helper.writer.file.FileWriter'
+    option: 'a'
+    destination: '/tmp'
+    prefix: 'mobideep_helper'
+  partitioner:
+    cls: 'mobideep_helper.partitioner.fibo.FibonacciPartitioner'
+    fibonacci_length: 6

@@ -1,0 +1,17 @@
+# log files
+*.log
+
+# resource files
+resources/*
+
+# build files
+build/*
+dist/*
+*.egg-info/*
+
+# Intellij IDE
+.idea/
+*.iml
+
+# Mac OSX
+.DS_Store
