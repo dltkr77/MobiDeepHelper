@@ -2,7 +2,6 @@
 
 from .common import get_config
 from .common import getclass
-from .transformer import Transformer
 
 
 # 기본적인 Runner
