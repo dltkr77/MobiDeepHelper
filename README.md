@@ -1,7 +1,7 @@
 MobiDeep Helper
 ===============
 
-볼츠만 머신(Boltzmann Machine)을 기반으로 하는 `MobiDeep` 엔진의 사용을 돕기 위한 헬퍼 모듈
+제한된 볼츠만 머신(Restricted Boltzmann Machine)을 기반으로 하는 심층 신뢰 신경망인 `MobiDeep` 엔진의 사용을 돕기 위한 헬퍼 모듈
 
 ## 구조
 Source --> Reader --> Partitioner --> Writer -> Destination
