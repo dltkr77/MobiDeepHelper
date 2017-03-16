@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*0
 
+import os
+from multiprocessing import Process
+from multiprocessing import Queue
+
 from .common import get_config
 from .common import getclass
 
@@ -37,7 +41,7 @@ class Runner:
         partitions = self.partitioner.get_partitions()
         for partition in partitions:
             writer_dict[partition] = self.writer_cls(self.w_config)
-            writer_dict[partition].open(partition)
+            writer_dict[partition].open('%s_%s' % (os.path.basename(source), str(partition)))
 
         while True:
             # Reader로부터 데이터를 읽는다.
@@ -55,4 +59,55 @@ class Runner:
             _writer.close()
             print 'writing success partition: %s' % (str(part))
 
-        print 'ssuccess'
+        print 'success'
+
+
+class MultipleRunner(Runner):
+    def run(self, source):
+        self.reader.open(source)
+
+        partitions = self.partitioner.get_partitions()
+        proc_dict = {}
+        for partition in partitions:
+            transformer = self.transformer_cls(self.t_config)
+            writer = self.writer_cls(self.w_config)
+            queue = Queue()
+            proc_dict[partition] = {
+                'proc': Process(target=self._work,
+                                args=('%s_%s' %(os.path.basename(source),
+                                                str(partition)),
+                                      transformer,
+                                      writer,
+                                      queue)),
+                'queue': queue,
+                'writer': writer}
+            proc_dict[partition]['proc'].start()
+
+        while True:
+            data = self.reader.read()
+            if not data:
+                break
+
+            for part, _data in self.partitioner.partition(data):
+                proc_dict[part]['queue'].put(_data)
+
+        for partition in partitions:
+            print 'waiting success partition: %s' % (str(partition))
+            proc_dict[partition]['queue'].put('<END>')
+
+        for partition in partitions:
+            proc_dict[partition]['proc'].join()
+
+        print 'success'
+
+    def _work(self, partition, transformer, writer, queue):
+        writer.open(partition)
+        while True:
+            data = queue.get()
+            if data == '<END>':
+                break
+            data = transformer.transform(data)
+            writer.write(data)
+        writer.close()
+        print partition, 'success'
+        exit(0)

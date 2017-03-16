@@ -5,15 +5,20 @@ import sys
 import argparse
 
 from mobideep_helper import Runner
+from mobideep_helper import MultipleRunner
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('source', help='data source')
     parser.add_argument('--config', help='mobideep_helper config file')
+    parser.add_argument('--multi', action='store_true', default=False, help='multiprocessing true/false')
     args = parser.parse_args()
     try:
-        runner = Runner(args.config)
+        if args.multi:
+            runner = MultipleRunner(args.config)
+        else:
+            runner = Runner(args.config)
         runner.run(args.source)
     except AttributeError, e:
         print >> sys.stderr, 'config file is wrong: %s, error: %s' % (str(args.config), str(e))

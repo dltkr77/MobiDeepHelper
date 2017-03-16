@@ -3,8 +3,7 @@
 import os
 import sys
 
-# from . import Writer
-from mobideep_helper.writer import Writer
+from . import Writer
 
 
 # 파일로 데이터를 쓰기위한 클래스
@@ -47,6 +46,7 @@ class FileWriter(Writer):
         # 쓰기 위해 파일을 오픈
         self.fd = open(destination, self.config['option'])
 
+    # 혹시 write 메소드가 오버라이딩되지 않았을 때 호출될 경우를 대비
     def write(self, data):
         raise NotImplementedError('Write method is not defined')
 
