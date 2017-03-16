@@ -1,3 +1,8 @@
+### v0.0.3
+
+ * `ChainTransfomer` 추가. functions에 정의된 함수들을 연속적으로 호출하도록 설정할 수 있음
+ * 파티셔닝시 기존 source의 이름과 파티션 정보를 Write 파일명으로 사용하도록 변경
+
 ### v0.0.2
 
  * FileWriter에서 특정 파티션명의 디렉토리로 파일을 모을 수 있는 `partition_dir` 옵션 추가

@@ -3,8 +3,7 @@
 import os
 import sys
 
-# from . import Writer
-from mobideep_helper.writer import Writer
+from . import Writer
 
 
 # 파일로 데이터를 쓰기위한 클래스

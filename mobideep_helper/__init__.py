@@ -37,7 +37,7 @@ class Runner:
         partitions = self.partitioner.get_partitions()
         for partition in partitions:
             writer_dict[partition] = self.writer_cls(self.w_config)
-            writer_dict[partition].open(partition)
+            writer_dict[partition].open('%s_%s' % (source, str(partition)))
 
         while True:
             # Reader로부터 데이터를 읽는다.
@@ -55,4 +55,4 @@ class Runner:
             _writer.close()
             print 'writing success partition: %s' % (str(part))
 
-        print 'ssuccess'
+        print 'success'
